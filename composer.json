@@ -1,0 +1,24 @@
+{
+    "name": "stokoe/tokenable",
+    "description": "Add API tokens to any model",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Stokoe",
+            "email": "mstokoe0990@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Stokoe\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Stokoe\\TokenableServiceProvider"
+            ]
+        }
+    }
+}
