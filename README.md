@@ -1,5 +1,3 @@
-# DISCLAIMER: None of this documentation has been tested yet! I typed this up late at night after finishing work on it without using it as I went.
-
 # Laravel-Tokenable
 
 Easy creation of API Tokens for your Laravel models.
@@ -57,5 +55,3 @@ $user->api_token;
 
 // return ex: d96d7fb36e394c22bab8d4089f619752a3fe172effbdaad738d4276d81df72305373e207a7a91f8e18fc32cf1f9b6c6977d540f9a125c0746101d539
 ```
-
-# DISCLAIMER: None of this documentation has been tested yet! I typed this up late at night after finishing work on it without using it as I went.
