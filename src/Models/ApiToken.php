@@ -19,4 +19,14 @@ class ApiToken extends Model
     {
         return $this->morphTo();
     }
+
+    public function getRelatedModel()
+    {
+        $model = $this->tokenable_type;
+        $id = $this->tokenable_id;
+
+        $related = $model::where('id', $id)->first();
+
+        return $related;
+    }
 }
