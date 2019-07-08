@@ -16,7 +16,7 @@ class CreateApiTokensTable extends Migration
         Schema::create('api_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('token');
-            $table->bigInteger('tokenable_id');
+            $table->string('tokenable_id');
             $table->string('tokenable_type');
             $table->timestamps();
             $table->softDeletes();

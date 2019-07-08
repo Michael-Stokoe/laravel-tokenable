@@ -2,5 +2,4 @@
 
 return [
     'token_length' => 60,
-    
 ];

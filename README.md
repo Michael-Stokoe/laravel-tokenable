@@ -12,16 +12,19 @@ Easy creation of API Tokens for your Laravel models.
 
 `$ php artisan vendor:publish --provider="Stokoe\TokenableServiceProvider"`
 
-## Configure Default API Token length
+---
 
-Open up config/tokenable.php:
+## Configuration
+
+### API Token length
+
+Open up `config/tokenable.php`:
 
 ```php
 return [
 	'token_length' => 60,
 ];
 ```
-
 ---
 ## Usage
 

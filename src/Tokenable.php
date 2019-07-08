@@ -18,17 +18,12 @@ trait Tokenable
 
     public function generateApiToken(int $length = null)
     {
-        if (!isset($length))
-        {
+        if (!isset($length)) {
             $length = config('tokenable.token_length');
         }
 
-        // if (function_exists('random_bytes')) {
-            // $token = bin2hex(random_bytes($length));
-        // } else {
-            $token = bin2hex(openssl_random_pseudo_bytes($length));
-        // }
-        
+        $token = bin2hex(random_bytes($length));
+
         $apiToken = new ApiToken([
             'token' => $token,
             'tokenable_id' => $this->id,
