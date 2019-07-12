@@ -22,11 +22,41 @@ class ApiToken extends Model
 
     public function getRelatedModel()
     {
-        $model = $this->tokenable_type;
+        $type = $this->tokenable_type;
         $id = $this->tokenable_id;
 
-        $related = $model::where('id', $id)->first();
+        $record = $type::find($id);
 
-        return $related;
+        return $record;
+    }
+
+    /**
+     * Scope a query to only include primary Api Tokens.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePrimary($query)
+    {
+        return $query->where('primary', true);
+    }
+
+    /**
+     * Set Api Token as the model's current primary API token.
+     *
+     * @param [type] $primary
+     * @return void
+     */
+    public function setPrimary($primary)
+    {
+        $currentPrimary = ApiToken::primary()->where([['tokenable_type', $this->tokenable_type], ['tokenable_id', $this->tokenable_id]])->first();
+
+        if (isset($currentPrimary)) {
+            $currentPrimary->primary = false;
+            $currentPrimary->save();
+        }
+
+        $this->primary = $primary;
+        $this->save();
     }
 }

@@ -6,30 +6,32 @@ use Stokoe\Models\ApiToken;
 
 trait Tokenable
 {
-    public function apiToken()
+    public function apiTokens()
     {
-        return $this->morphOne('Stokoe\Models\ApiToken', 'tokenable');
+        return $this->morphMany('Stokoe\Models\ApiToken', 'tokenable', null, null, $this->primaryKey);
     }
 
     public function getApiTokenAttribute()
     {
-        return $this->attributes['api_token'] = $this->apiToken()->orderBy('created_at', 'desc')->first()->token ?? null;
+        return $this->attributes['api_token'] = $this->apiTokens()->where('primary', true)->first()->token ?? null;
     }
 
-    public function generateApiToken(int $length = null)
+    public function generateApiToken(int $length = null, bool $setAsPrimary = null)
     {
-        if (!isset($length)) {
-            $length = config('tokenable.token_length');
-        }
+        $length ?? $length = config('tokenable.token_length');
 
         $token = bin2hex(random_bytes($length));
 
         $apiToken = new ApiToken([
             'token' => $token,
-            'tokenable_id' => $this->id,
+            'tokenable_id' => $this->{$this->primaryKey},
             'tokenable_type' => static::class,
         ]);
 
-        return $this->apiToken()->save($apiToken)->token;
+        $makePrimary = $setAsPrimary ?:config('tokenable.make_primary');
+
+        $makePrimary ?? $apiToken->setPrimary(true);
+
+        return $this->apiTokens()->save($apiToken)->token;
     }
 }
