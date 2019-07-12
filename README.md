@@ -23,8 +23,20 @@ Open up `config/tokenable.php`:
 ```php
 return [
 	'token_length' => 60,
-];
+...
 ```
+
+### Set New Tokens As Primary
+
+Open up `config/tokenable.php`:
+
+```php
+return [
+...
+	'make_primary' => true,
+...
+```
+
 ---
 ## Usage
 

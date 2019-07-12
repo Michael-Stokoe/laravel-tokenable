@@ -18,7 +18,7 @@ class CreateApiTokensTable extends Migration
             $table->string('token');
             $table->string('tokenable_id');
             $table->string('tokenable_type');
-            $table->boolean('primary')->default(true);
+            $table->boolean('primary')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
